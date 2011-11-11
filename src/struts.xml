@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+         "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+         "http://struts.apache.org/dtds/struts-2.0.dtd">
+ <struts>
+ <!--package name，extends-->
+     <package name="binhunt" extends="struts-default"> 
+         <action name="Add" class="com.smu.binhunt.action.AddAction">
+           <!-- view,name matching returning string,type-->
+           <result name="success">addsuccess.jsp</result>
+           <result name="error">addfail.jsp</result>
+           <result name="input">add.jsp</result>
+         </action>
+         <action name="Query" class="com.smu.binhunt.action.QueryAction">
+           <!--view,name matching returning string,type-->
+           <result name="success">querysuccess.jsp</result>
+           <result name="error">queryfail.jsp</result>
+           <result name="input">query.jsp</result>
+         </action>
+         
+         <action name="Download" class="com.smu.binhunt.action.DownloadAction">
+         	<!-- type is stream, will be processed by org.apache.struts2.dispatcher.StreamResult -->
+         	<result name="success" type="stream">
+         		<!-- default is text/plian -->
+         		<param name="contentType">application/octet-stream</param>
+         		<!-- default is inputStream, it will indicate StreamResult by the getter method on inputName -->
+         		<!-- e.g., we obtain file content by getInputStream(), which needs to appear in your Action -->
+         		<param name="inputName">inputStream</param>
+         		<!-- default is inline, meaning to be opened online -->
+         		<!-- set to "attachment" to tell the browser to download the file -->
+         		<!-- filename is to set the file name when downloading -->
+         		<!-- ${fileName} means it will get its name by calling getFileName() in your action -->
+         		<param name="contentDisposition">attachment;filename="${fileName}"</param>
+         		<!-- buffer size when outputting -->
+         		<param name="bufferSize">4096</param>
+         	</result>
+         </action>
+     </package>
+ </struts>
